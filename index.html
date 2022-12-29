@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css" />
+    <title>MyTitle</title>
+  </head>
+  <body>
+    <div id="input-area">
+      <input type="date" id="input" /><button onclick="transform()">
+        轉換
+      </button>
+    </div>
+    <div id="content"></div>
+    <script src="https://unpkg.com/lunar-javascript/lunar.js"></script>
+    <script>
+      function transform() {
+        let input = document.getElementById("input").value;
+        let year = input.match(/\d{4}/)[0];
+        let month = input.match(/\d{2}/g)[2];
+        let day = input.match(/\d{2}/g)[3];
+
+        let solar = Solar.fromYmd(year, month, day);
+
+        let lunar = solar.getLunar();
+        console.log(lunar);
+
+        let content = document.getElementById("content");
+        content.textContent = lunar.toFullString();
+      }
+    </script>
+  </body>
+</html>
